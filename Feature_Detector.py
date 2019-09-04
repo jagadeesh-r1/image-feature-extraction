@@ -46,8 +46,8 @@ def save_image_features(category,sub_category):
 
     np.save(open(img_feature_file_path, 'wb+'), bottleneck_features_train) #Save Image Features in numpy file
 
-    category_name_path = 'FileNames/' + category + '/' + sub_category + '_file_name.npy'
-    np.save(open(category_name_path, 'wb'), np.array(CategoryName_and_ImageName))
+    #category_name_path = 'FileNames/' + category + '/' + sub_category + '_file_name.npy'
+    #np.save(open(category_name_path, 'wb'), np.array(CategoryName_and_ImageName))
     print('saved numpy file')
     end_time = time.time()
 
@@ -59,7 +59,7 @@ if __name__ == "__main__":
     images_path = 'level_3/'
     for i in os.listdir(images_path):
         try:
-            img_feature_dir_path = '/home/ubuntu/FileNames/' + i
+            img_feature_dir_path = '/home/ubuntu/Image_Features/' + i
             os.mkdir(img_feature_dir_path)
         except:
             print(i,' folder coulnt be created!')
@@ -78,6 +78,7 @@ if __name__ == "__main__":
     missed_categories = []
 
     for i in range(len(list)):
+        time.sleep(3)
         try:
             list[i][0] = list[i][0].replace(" ","_")
             list[i][1] = list[i][1].replace(" ","_")
