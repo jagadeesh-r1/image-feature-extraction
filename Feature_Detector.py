@@ -34,8 +34,8 @@ def save_image_features(category,sub_category):
     for i in generator.filenames:
         print(i)
         CategoryName_and_ImageName.append(i[0:-4])
-    img_feature_file_path = '/home/ubuntu/FileNames/' + category + '/' + sub_category + '_file_name.npy'
-    #img_feature_file_path = '/home/ec2-user/SageMaker/Image_Features/' + category + '/' + sub_category + '.npy'
+    #img_feature_file_path = '/home/ubuntu/FileNames/' + category + '/' + sub_category + '_file_name.npy'
+    img_feature_file_path = '/home/ubuntu/Image_Features/' + category + '/' + sub_category + '.npy'
     file = open(img_feature_file_path, 'wb+')
     file.close()
     print('file created!')
@@ -68,32 +68,23 @@ if __name__ == "__main__":
                 if j.startswith('.') or i.startswith('.'):
                     continue
                 else:
-                    try:
-                        for k in os.listdir(image_path + i +'/'+j+'/'):
-                            if k.startswith('.'):
-                                continue
-                            else:
-                                list.append([i,j,k])
-                    except:
-                        list.append([i,j])
+                    list.append([i,j])
         except:
             pass
     gc.collect()
     for i in range(1,len(list)):
         print(i,list[i])
-
+    list.reverse()
     missed_categories = []
 
     for i in range(len(list)):
         try:
             list[i][0] = list[i][0].replace(" ","_")
             list[i][1] = list[i][1].replace(" ","_")
-            list[i][2] = list[i][2].replace(" ","_")
             list[i][0] = list[i][0].replace("&","and")
-            list[i][1] = list[i][1].replace("&","and")
-            list[i][2] = list[i]2].replace("&","and")          
-            print(list[i][0],list[i][1],list[i][2])
-            #save_image_features(list[i][0],list[i][1])
+            list[i][1] = list[i][1].replace("&","and")        
+            #print(list[i][0],list[i][1])
+            save_image_features(list[i][0],list[i][1])
             gc.collect()
         except:
             missed_categories.append(i)
