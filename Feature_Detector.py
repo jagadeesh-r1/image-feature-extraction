@@ -79,6 +79,10 @@ if __name__ == "__main__":
 
     for i in range(len(list)):
         try:
+            list[i][0] = list[i][0].replace(" ","_")
+            list[i][1] = list[i][1].replace(" ","_")
+            list[i][0] = list[i][0].replace("&","and")
+            list[i][1] = list[i][1].replace("&","and")
             save_image_features(list[i][0],list[i][1])
             gc.collect()
         except:
