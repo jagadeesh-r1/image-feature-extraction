@@ -13,7 +13,7 @@ def save_image_features(category,sub_category):
     print(category,sub_category)
     start_time = time.time()
     img_width, img_height = 224, 224
-    train_data_dir = '/home/ec2-user/SageMaker/level_3/'+category + '/' + sub_category
+    train_data_dir = '/home/ubuntu/level_3/'+category + '/' + sub_category
     batch_size = 1
     print(train_data_dir)
     #Function to compute VGG-16 CNN for image feature extraction.
@@ -83,7 +83,8 @@ if __name__ == "__main__":
             list[i][1] = list[i][1].replace(" ","_")
             list[i][0] = list[i][0].replace("&","and")
             list[i][1] = list[i][1].replace("&","and")
-            save_image_features(list[i][0],list[i][1])
+            print(list[i][0],list[i][0])
+            #save_image_features(list[i][0],list[i][1])
             gc.collect()
         except:
             missed_categories.append(i)
