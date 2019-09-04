@@ -68,7 +68,11 @@ if __name__ == "__main__":
                 if j.startswith('.') or i.startswith('.'):
                     continue
                 else:
-                    list.append([i,j])
+                    for k in os.listdir(image_path + i +'/'+j+'/'):
+                        if k.startswith('.'):
+                            continue
+                        else:
+                            list.append([i,j,k])
         except:
             pass
     gc.collect()
