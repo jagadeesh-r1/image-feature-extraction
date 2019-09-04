@@ -68,16 +68,19 @@ if __name__ == "__main__":
                 if j.startswith('.') or i.startswith('.'):
                     continue
                 else:
-                    for k in os.listdir(image_path + i +'/'+j+'/'):
-                        if k.startswith('.'):
-                            continue
-                        else:
-                            list.append([i,j,k])
+                    try:
+                        for k in os.listdir(image_path + i +'/'+j+'/'):
+                            if k.startswith('.'):
+                                continue
+                            else:
+                                list.append([i,j,k])
+                    except:
+                        list.append([i,j])
         except:
             pass
     gc.collect()
-    # for i in range(1,len(list)):
-    #     print(i,list[i])
+    for i in range(1,len(list)):
+        print(i,list[i])
 
     missed_categories = []
 
@@ -85,9 +88,11 @@ if __name__ == "__main__":
         try:
             list[i][0] = list[i][0].replace(" ","_")
             list[i][1] = list[i][1].replace(" ","_")
+            list[i][2] = list[i][2].replace(" ","_")
             list[i][0] = list[i][0].replace("&","and")
             list[i][1] = list[i][1].replace("&","and")
-            print(list[i][0],list[i][0])
+            list[i][2] = list[i]2].replace("&","and")          
+            print(list[i][0],list[i][1],list[i][2])
             #save_image_features(list[i][0],list[i][1])
             gc.collect()
         except:
