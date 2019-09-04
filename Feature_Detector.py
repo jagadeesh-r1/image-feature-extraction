@@ -34,21 +34,21 @@ def save_image_features(category,sub_category):
     for i in generator.filenames:
         print(i)
         CategoryName_and_ImageName.append(i[0:-4])
-
-    img_feature_file_path = '/home/ec2-user/SageMaker/Image_Features/' + category + '/' + sub_category + '.npy'
+    img_feature_file_path = '/home/ubuntu/FileNames/' + category + '/' + sub_category + '_file_name.npy'
+    #img_feature_file_path = '/home/ec2-user/SageMaker/Image_Features/' + category + '/' + sub_category + '.npy'
     file = open(img_feature_file_path, 'wb+')
     file.close()
     print('file created!')
-    bottleneck_features_train = model.predict_generator(generator, len(generator.filenames) // batch_size)
-    bottleneck_features_train = bottleneck_features_train.reshape((len(generator.filenames),25088))
+    #bottleneck_features_train = model.predict_generator(generator, len(generator.filenames) // batch_size)
+    #bottleneck_features_train = bottleneck_features_train.reshape((len(generator.filenames),25088))
 
-    print(bottleneck_features_train)
+    #print(bottleneck_features_train)
 
     np.save(open(img_feature_file_path, 'wb+'), bottleneck_features_train) #Save Image Features in numpy file
 
     category_name_path = 'FileNames/' + category + '/' + sub_category + '_file_name.npy'
     np.save(open(category_name_path, 'wb'), np.array(CategoryName_and_ImageName))
-
+    print('saved numpy file')
     end_time = time.time()
 
     print('Total Time taken to extract features ===>>  ',end_time-start_time,"\n")
@@ -59,7 +59,7 @@ if __name__ == "__main__":
     images_path = 'level_3/'
     for i in os.listdir(images_path):
         try:
-            img_feature_dir_path = '/home/ec2-user/SageMaker/Image_Features/' + i
+            img_feature_dir_path = '/home/ubuntu/FileNames/' + i
             os.mkdir(img_feature_dir_path)
         except:
             print(i,' folder coulnt be created!')
